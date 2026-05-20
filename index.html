@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nova Search</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-glow glow-1"></div>
+  <div class="bg-glow glow-2"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">N</div>
+      <div>
+        <div class="brand-title">Nova Search</div>
+        <div class="brand-subtitle">Dark web search powered by Brave</div>
+      </div>
+    </div>
+
+    <div class="topbar-actions">
+      <button id="settingsBtn" class="icon-btn" title="Settings">⚙</button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <h1>Search the web with a clean, dark UI.</h1>
+      <p>
+        Search results, privacy toggles, blocked-domain filtering, and local-only settings.
+      </p>
+
+      <form id="searchForm" class="searchbar" autocomplete="off">
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Search anything..."
+          spellcheck="false"
+        />
+        <button type="submit" class="search-btn">Search</button>
+      </form>
+
+      <div class="meta-row">
+        <div id="statusPill" class="pill">Ready</div>
+        <div id="queryInfo" class="muted"></div>
+      </div>
+
+      <div id="historyWrap" class="history-wrap hidden">
+        <div class="section-label">Recent searches</div>
+        <div id="historyList" class="chips"></div>
+      </div>
+    </section>
+
+    <section id="resultsWrap" class="results-wrap">
+      <div id="results" class="results"></div>
+
+      <div class="pager">
+        <button id="prevPage" class="secondary-btn" disabled>Previous</button>
+        <div id="pageLabel" class="page-label">Page 1</div>
+        <button id="nextPage" class="secondary-btn" disabled>Next</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="settingsOverlay" class="overlay hidden" aria-hidden="true">
+    <div class="settings-card">
+      <div class="settings-head">
+        <h2>Settings</h2>
+        <button id="closeSettings" class="icon-btn">✕</button>
+      </div>
+
+      <div class="settings-grid">
+        <label class="field">
+          <span>Brave API token</span>
+          <input id="apiToken" type="password" placeholder="Paste your token here" />
+        </label>
+
+        <label class="field">
+          <span>API base URL</span>
+          <input
+            id="apiBase"
+            type="text"
+            placeholder="https://api.search.brave.com/res/v1/web/search"
+          />
+        </label>
+
+        <label class="field">
+          <span>Country</span>
+          <input id="country" type="text" maxlength="2" placeholder="US" />
+        </label>
+
+        <label class="field">
+          <span>Search language</span>
+          <input id="searchLang" type="text" placeholder="en" />
+        </label>
+
+        <label class="field">
+          <span>UI language</span>
+          <input id="uiLang" type="text" placeholder="en-US" />
+        </label>
+
+        <label class="field">
+          <span>Safe search</span>
+          <select id="safeSearch">
+            <option value="strict">strict</option>
+            <option value="moderate">moderate</option>
+            <option value="off">off</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Results per page</span>
+          <input id="resultsPerPage" type="number" min="1" max="20" />
+        </label>
+
+        <label class="field">
+          <span>Freshness</span>
+          <input id="freshness" type="text" placeholder="pm, pw, py, or 2025-01-01to2025-12-31" />
+        </label>
+
+        <label class="field wide">
+          <span>Blocked domains, one per line or comma-separated</span>
+          <textarea
+            id="blockedDomains"
+            rows="5"
+            placeholder="doubleclick.net&#10;taboola.com&#10;outbrain.com"
+          ></textarea>
+        </label>
+
+        <div class="toggle-row">
+          <label class="toggle">
+            <input id="hideSponsored" type="checkbox" />
+            <span>Hide suspicious/promotional results</span>
+          </label>
+
+          <label class="toggle">
+            <input id="stripTracking" type="checkbox" />
+            <span>Strip tracking parameters from links</span>
+          </label>
+
+          <label class="toggle">
+            <input id="rememberHistory" type="checkbox" />
+            <span>Remember recent searches locally</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="settings-foot">
+        <button id="resetSettings" class="secondary-btn">Reset</button>
+        <button id="saveSettings" class="search-btn">Save</button>
+      </div>
+
+      <p class="small-note">
+        This interface does not add analytics. The search query still goes to Brave when you search.
+        For a public GitHub Pages deployment, use a proxy if you do not want the token visible in the browser.
+      </p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
